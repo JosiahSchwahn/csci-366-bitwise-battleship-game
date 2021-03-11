@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "game.h"
 
 // STEP 9 - Synchronization: the GAME structure will be accessed by both players interacting
@@ -53,7 +54,20 @@ unsigned long long int xy_to_bitval(int x, int y) {
     //
     // you will need to use bitwise operators and some math to produce the right
     // value.
-    return 1ull;
+
+    unsigned long long value;
+
+    if (x > 7 || x < 0 || y > 7 || y < 0){
+
+        value = 0;
+
+    } else{
+
+        unsigned int bit_shifts = (1 * x) + (8 * y);
+
+        value = 1ull << bit_shifts;
+    }
+    return value;
 }
 
 struct game * game_get_current() {
@@ -72,16 +86,101 @@ int game_load_board(struct game *game, int player, char * spec) {
     // slot and return 1
     //
     // if it is invalid, you should return -1
+
+    //      RULES FOR A BAD BOARD:
+
+    //      1.) If the spec isn't a certain length, it's a bad board
+    //      2.) If there is a negative value (-1) in the string, it's a bad board.
+    //      3.) If there is both [c and C, b and B, d and D, s and S, p and p]
+    //
+
+    struct game *gameon = game_get_current();
+    struct player_info *player_info = &gameon->players[player];
+
+    if(spec == NULL){
+        return -1;
+    }
+
+
+    int length = 0;
+
+    int c = 0;
+    int b = 0;
+    int d = 0;
+    int s = 0;
+    int p = 0;
+
+    char dir;
+
+    for(int k = 0; k < 15; k+= 3){
+
+        if(spec[k] == 'c'){
+            length = 5;
+            dir = 'v';
+            c++;
+            if (c > 1){
+                return -1;
+
+            }
+
+        } else if(spec[k])
+
+    }
+
+
+
+
+
+
+
+
+
 }
 
 int add_ship_horizontal(player_info *player, int x, int y, int length) {
     // implement this as part of Step 2
     // returns 1 if the ship can be added, -1 if not
     // hint: this can be defined recursively
+
+    unsigned long long temp  = xy_to_bitval(x,y);
+
+    if (length == 0){
+
+        return 1;
+    } else {
+         if (temp & player->ships){
+             return -1;
+         } else{
+
+             player->ships = player->ships | temp;
+             return add_ship_horizontal(player, x + 1, y, length - 1);
+
+         }
+
+     }
+
+
 }
 
 int add_ship_vertical(player_info *player, int x, int y, int length) {
     // implement this as part of Step 2
     // returns 1 if the ship can be added, -1 if not
     // hint: this can be defined recursively
+
+    unsigned long long temp  = xy_to_bitval(x,y);
+
+    if (length == 0){
+
+        return 1;
+    } else {
+        if (temp & player->ships){
+            return -1;
+        } else{
+
+            player->ships = player->ships | temp;
+            return add_ship_vertical(player, x, y +1, length - 1);
+
+        }
+    }
+
 }
