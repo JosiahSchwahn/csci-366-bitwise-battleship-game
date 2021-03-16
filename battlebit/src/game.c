@@ -118,7 +118,6 @@ int game_load_board(struct game *game, int player, char * spec) {
             c++;
             if (c > 1){
                 return -1;
-
             }
 
         } else if(spec[k] == 'b'){
@@ -196,11 +195,11 @@ int game_load_board(struct game *game, int player, char * spec) {
             }
 
         } else{
-            return -1;
+            return (-1);
         }
 
-        int start_x = spec[k+1] = '0';
-        int start_y = spec[k+2] = '0';
+        int start_x = spec[k+1] - '0';
+        int start_y = spec[k+2] - '0';
 
 
         if(start_x < 0 || start_y < 0) {return -1;}
@@ -264,19 +263,18 @@ int add_ship_vertical(player_info *player, int x, int y, int length) {
     // hint: this can be defined recursively
 
     unsigned long long temp  = xy_to_bitval(x,y);
+    unsigned long long temp1 = player->ships;
 
     if (length == 0){
 
         return 1;
+
     } else {
-        if (temp & player->ships){
+        if (temp & temp1){
             return -1;
         } else{
-
             player->ships = player->ships | temp;
-            return add_ship_vertical(player, x, y +1, length - 1);
-
+            return add_ship_vertical(player, x, y + 1, length - 1);
         }
     }
-
 }

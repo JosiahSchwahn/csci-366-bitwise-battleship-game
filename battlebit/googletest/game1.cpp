@@ -96,7 +96,7 @@ TEST(game_load_board,incomplete_spec){
     game_init();
     struct game * gameon = game_get_current();
     struct player_info *player_info = &gameon->players[0];
-    //game_init_player_info(player_info);
+    game_init_player_info(player_info);
     char * spec = "C00b02D23S47";//incomplete spec
     ASSERT_EQ(game_load_board(gameon,0,spec),-1);
     spec = "C-1-1b02D23S47p71";//invalid spec
