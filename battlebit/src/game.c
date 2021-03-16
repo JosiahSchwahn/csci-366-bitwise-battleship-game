@@ -4,7 +4,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include "game.h"
 
 // STEP 9 - Synchronization: the GAME structure will be accessed by both players interacting
@@ -113,7 +112,6 @@ int game_load_board(struct game *game, int player, char * spec) {
     char dir;
 
     for(int k = 0; k < 15; k+= 3){
-
         if(spec[k] == 'c'){
             length = 5;
             dir = 'v';
@@ -123,17 +121,119 @@ int game_load_board(struct game *game, int player, char * spec) {
 
             }
 
-        } else if(spec[k])
+        } else if(spec[k] == 'b'){
+            length = 4;
+            dir = 'v';
+            b++;
+            if (b > 1){
+                return -1;
+            }
 
+        } else if(spec[k] == 's') {
+            length = 3;
+            dir = 'v';
+            s++;
+            if (s > 1) {
+                return -1;
+            }
+
+        } else if(spec[k] == 'd') {
+            length = 3;
+            dir = 'v';
+            d++;
+            if (d > 1) {
+                return -1;
+            }
+
+        } else if(spec[k] == 'p') {
+            length = 2;
+            dir = 'v';
+            p++;
+            if (p > 1) {
+                return -1;
+            }
+
+        } else if(spec[k] == 'C') {
+            length = 5;
+            dir = 'h';
+            c++;
+            if (c > 1) {
+                return -1;
+            }
+
+        }
+
+        else if(spec[k] == 'B') {
+            length = 4;
+            dir = 'h';
+            b++;
+            if (b > 1) {
+                return -1;
+            }
+
+        } else if(spec[k] == 'P') {
+            length = 2;
+            dir = 'h';
+            p++;
+            if (p > 1) {
+                return -1;
+            }
+
+        } else if(spec[k] == 'D') {
+            length = 3;
+            dir = 'h';
+            d++;
+            if (d > 1) {
+                return -1;
+            }
+
+        } else if(spec[k] == 'S') {
+            length = 3;
+            dir = 'h';
+            s++;
+            if (s > 1) {
+                return -1;
+            }
+
+        } else{
+            return -1;
+        }
+
+        int start_x = spec[k+1] = '0';
+        int start_y = spec[k+2] = '0';
+
+
+        if(start_x < 0 || start_y < 0) {return -1;}
+        if(start_x > 7 || start_y > 7) {return -1;}
+
+
+        if(dir == 'h'){
+            if(add_ship_horizontal(player_info, start_x, start_y, length) == -1){
+
+                int valid = add_ship_horizontal(player_info, start_x, start_y, length);
+                if(valid == -1){
+                    return -1;
+
+                }
+            }
+        }
+
+        if(dir == 'v'){
+            if(add_ship_vertical(player_info, start_x, start_y, length) == -1){
+
+                int valid = add_ship_vertical(player_info, start_x, start_y, length);
+                if(valid == -1){
+                    return -1;
+                }
+            }
+        }
     }
 
+    if(player == 1){
+        game->status = PLAYER_0_TURN;
+    }
 
-
-
-
-
-
-
+    return 1;
 
 }
 
@@ -154,12 +254,8 @@ int add_ship_horizontal(player_info *player, int x, int y, int length) {
 
              player->ships = player->ships | temp;
              return add_ship_horizontal(player, x + 1, y, length - 1);
-
          }
-
      }
-
-
 }
 
 int add_ship_vertical(player_info *player, int x, int y, int length) {
