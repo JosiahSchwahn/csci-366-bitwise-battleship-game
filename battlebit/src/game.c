@@ -91,7 +91,7 @@ int game_load_board(struct game *game, int player, char * spec) {
     //      1.) If the spec isn't a certain length, it's a bad board
     //      2.) If there is a negative value (-1) in the string, it's a bad board.
     //      3.) If there is both [c and C, b and B, d and D, s and S, p and p]
-    //
+    //      4.) If they ship goes outside the board's boundries
 
     struct game *gameon = game_get_current();
     struct player_info *player_info = &gameon->players[player];
