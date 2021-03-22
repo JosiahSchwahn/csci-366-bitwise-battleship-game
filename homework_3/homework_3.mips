@@ -1,2 +1,35 @@
 ;; TODO - implement counting up from 1 to 10
 ;; in MIPS assembly, code only
+
+.data
+
+.code
+
+main proc
+
+mov eax, 0
+
+mov ebx,1
+
+mov ecx,10
+
+l1:
+
+move eax, ebx
+
+call writeint
+
+inc ebx
+
+call crlf
+
+loop l1
+
+
+call crlf
+
+
+invoke ExitProcess,0
+main endp
+end main
+
