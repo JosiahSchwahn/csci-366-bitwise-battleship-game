@@ -1,0 +1,29 @@
+3,28c3
+< Warning in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 4 column 1: MARS does not recognize the .code directive.  Ignored.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 6 column 1: Symbol "main" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 6 column 6: Symbol "proc" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 8 column 1: Symbol "mov" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 8 column 5: Symbol "eax" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 10 column 1: Symbol "mov" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 10 column 5: Symbol "ebx" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 12 column 1: Symbol "mov" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 12 column 5: Symbol "ecx" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 18 column 1: Symbol "call" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 18 column 6: Symbol "writeint" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 20 column 1: Symbol "inc" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 20 column 5: Symbol "ebx" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 22 column 1: Symbol "call" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 22 column 6: Symbol "crlf" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 24 column 1: Symbol "loop" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 27 column 1: Symbol "call" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 27 column 6: Symbol "crlf" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 30 column 1: Symbol "invoke" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 30 column 8: Symbol "ExitProcess" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 31 column 1: Symbol "main" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 31 column 6: Symbol "endp" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 32 column 1: Symbol "end" not found in symbol table.
+< Error in /home/carson/Projects/msu/csci-366-spring2021/grading/scripts/repos/josiah_schwahn/homework_3/tmp.mips line 32 column 5: Symbol "main" not found in symbol table.
+< 
+< Processing terminated due to errors.
+---
+> 12345678910
