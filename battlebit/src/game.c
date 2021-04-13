@@ -29,16 +29,55 @@ void game_init_player_info(player_info *player_info) {
 }
 
 int game_fire(game *game, int player, int x, int y) {
-    // Step 5 - This is the crux of the game.  You are going to take a shot from the given player and
-    // update all the bit values that store our game state.
-    //
-    //  - You will need up update the players 'shots' value
-    //  - you You will need to see if the shot hits a ship in the opponents ships value.  If so, record a hit in the
-    //    current players hits field
-    //  - If the shot was a hit, you need to flip the ships value to 0 at that position for the opponents ships field
-    //
-    //  If the opponents ships value is 0, they have no remaining ships, and you should set the game state to
-    //  PLAYER_1_WINS or PLAYER_2_WINS depending on who won.
+
+    int enemy = (player + 1) % 2;
+
+    if(game->status == PLAYER_0_TURN){
+
+        game->status == PLAYER_1_TURN;
+    } else{
+        game->status == PLAYER_0_TURN;
+    }
+
+    if(xy_to_bitval(x,y) & game->players[enemy].ships){
+
+        game->players[player].hits = xy_to_bitval(x, y) | game->players[player].hits;
+        game->players[player].shots = xy_to_bitval(x, y) | game->players[player].shots;
+        game->players[enemy].ships = xy_to_bitval(x, y) ^ game->players[enemy].ships;
+
+        if(game->players[enemy].ships == 0ull){
+            if(enemy == 0){
+                game->status = PLAYER_1_WINS;
+            }
+            else{
+                game->status = PLAYER_0_WINS;
+            }
+        }
+
+        return 1;
+
+
+    } else {
+
+        game->players[player].shots = xy_to_bitval(x,y) | game->players[player].shots;
+
+        return 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 unsigned long long int xy_to_bitval(int x, int y) {
