@@ -84,15 +84,15 @@ Expected equality of these values:
     Which is: 3
   pGame->status
     Which is: 2
-[  FAILED  ] game_status.is_correct (0 ms)
-[----------] 1 test from game_status (0 ms total)
+[  FAILED  ] game_status.is_correct (1 ms)
+[----------] 1 test from game_status (1 ms total)
 
 [----------] 2 tests from repl_print_ships
 [ RUN      ] repl_print_ships.print_ships
 [       OK ] repl_print_ships.print_ships (0 ms)
 [ RUN      ] repl_print_ships.print_ship_status
-[       OK ] repl_print_ships.print_ship_status (1 ms)
-[----------] 2 tests from repl_print_ships (1 ms total)
+[       OK ] repl_print_ships.print_ship_status (0 ms)
+[----------] 2 tests from repl_print_ships (0 ms total)
 
 [----------] 2 tests from repl_print_hits
 [ RUN      ] repl_print_hits.print_hits
