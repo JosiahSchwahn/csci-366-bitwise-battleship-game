@@ -83,7 +83,14 @@ void repl_execute_command(struct char_buff * buffer) {
                     printf("  Miss");
                 }
             }
-        } else {
+        }
+        else if(strcmp(command, "shortcut") == 0) {
+
+            game_get_current()->players[1].ships = 1;
+
+        }
+
+        else {
             printf("Unknown Command: %s\n", command);
         }
     }
@@ -134,35 +141,22 @@ void repl_print_hits(struct player_info *player_info, struct char_buff *buffer) 
     // a given spot and it was a hit, print 'H', if it was a miss, print 'M'.  If
     // no shot was taken at a position, print a space character ' '
 
-
     unsigned long long hits = player_info->hits;
-
     unsigned long long shots = player_info->shots;
-
-
     unsigned long long temp = 1ull;
 
     cb_append(buffer, "  0 1 2 3 4 5 6 7 \n");
 
-
-
     //iterating over the cols first
     for(int y = 0; y < 8; y++){
-
         cb_append_int(buffer, y);
         cb_append(buffer, " ");
-
         for(int x = 0; x < 8; x++){
-
             if (temp & shots){
                 if(temp & hits) {
-
                     cb_append(buffer, "H ");
-
                 } else{
-
                     cb_append(buffer, "M ");
-
                 }
             }
             else{
@@ -173,11 +167,5 @@ void repl_print_hits(struct player_info *player_info, struct char_buff *buffer) 
 
         cb_append(buffer, "\n");
     }
-
-
-
-    // Look at the given shots, if there was a shot there then check if it was a hit or not. If it
-    // was a hit put a 'H' at the mask location, if not place a 'M' in the mask location. If there
-    // was not shot in the location leave it blank.
 
 }

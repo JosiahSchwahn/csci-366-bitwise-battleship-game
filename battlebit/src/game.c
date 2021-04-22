@@ -33,10 +33,9 @@ int game_fire(game *game, int player, int x, int y) {
     int enemy = (player + 1) % 2;
 
     if(game->status == PLAYER_0_TURN){
-
-        game->status == PLAYER_1_TURN;
+        game->status = PLAYER_1_TURN;
     } else{
-        game->status == PLAYER_0_TURN;
+        game->status = PLAYER_0_TURN;
     }
 
     if(xy_to_bitval(x,y) & game->players[enemy].ships){
@@ -63,19 +62,6 @@ int game_fire(game *game, int player, int x, int y) {
 
         return 0;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
@@ -138,7 +124,6 @@ int game_load_board(struct game *game, int player, char * spec) {
     if(spec == NULL){
         return -1;
     }
-
 
     int length = 0;
 
