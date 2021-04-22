@@ -50,6 +50,10 @@ int handle_client_connect(int player) {
     char_buff *input_buffer = cb_create(2000);
     char_buff *output_buffer = cb_create(2000);
 
+    sprintf(msg, "Welcome to the battleBit server Player %d\n", player);
+    cb_append(output_buffer, msg);
+    cb_write(SERVER->player_sockets[player], output_buffer);
+
     int read_size;
 
     while((read_size = recv(SERVER->player_sockets[player], raw_buffer, 2000, 0)) > 0){
@@ -83,7 +87,7 @@ int handle_client_connect(int player) {
                 //both boards are in
                 else if(SERVER->player_threads[1]){
                     game->status = PLAYER_0_TURN;
-                    cb_append(output_buffer, "All Boards are loaded in, it's Player 0's turn");
+                    cb_append(output_buffer, "All Boards are loaded in, it's Player 0's turn\n");
                     cb_write(SERVER->player_sockets[player], output_buffer);
 
                 } else{
@@ -100,7 +104,7 @@ int handle_client_connect(int player) {
                 cb_write(SERVER->player_sockets[player], output_buffer);
 
             } else if (strcmp(command,"say") == 0){
-                sprintf(msg,"PLayer %d says:%s", player, raw_buffer + 3);
+                sprintf(msg,"PLayer %d says:%s\n", player, raw_buffer + 3);
                 cb_append(output_buffer, msg);
                 cb_write(SERVER->player_sockets[opponent], output_buffer);
 
@@ -112,16 +116,14 @@ int handle_client_connect(int player) {
                     cb_write(SERVER->player_sockets[player], output_buffer);
 
                 } else if (game->status == PLAYER_1_TURN && player == 0){
-                    cb_append(output_buffer, "It's not your turn yy\n");
+                    cb_append(output_buffer, "It's not your turn\n");
                     cb_write(SERVER->player_sockets[player], output_buffer);
 
                 } else if (game->status == PLAYER_0_TURN && player == 1){
-                    cb_append(output_buffer, "It's not your turn xx\n");
+                    cb_append(output_buffer, "It's not your turn\n");
                     cb_write(SERVER->player_sockets[player], output_buffer);
 
                 } else{
-
-
 
                     int x = cb_next_token(input_buffer)[0] - '0';
                     int y = cb_next_token(input_buffer)[0] - '0';
@@ -144,28 +146,16 @@ int handle_client_connect(int player) {
                         }
                     }
                 }
-
             } else if(strcmp(command,"exit") == 0){
 
                 close(SERVER->player_sockets[player]);
                 close(SERVER->player_sockets[opponent]);
-
-
             } else{
-                cb_append(output_buffer, "This is an invalid command");
+                cb_append(output_buffer, "This is an invalid command\n");
                 cb_write(SERVER->player_sockets[player], output_buffer);
-
             }
-
         }
-
-
-
-
     }
-
-
-
 }
 
 void server_broadcast(char_buff *msg) {
@@ -231,5 +221,4 @@ int server_start() {
 
     init_server();
     pthread_create(&SERVER->server_thread, NULL, (void*) run_server, NULL);
-
 }
