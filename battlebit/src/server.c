@@ -60,8 +60,6 @@ int handle_client_connect(int player) {
         cb_reset(input_buffer);
         cb_reset(output_buffer);
 
-        cb_append(output_buffer, "battleBit (? for help)");
-        cb_write(SERVER->player_sockets[player], output_buffer);
 
         if(read_size > 0){
 
