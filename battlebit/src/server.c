@@ -50,7 +50,8 @@ int handle_client_connect(int player) {
     char_buff *input_buffer = cb_create(2000);
     char_buff *output_buffer = cb_create(2000);
 
-    sprintf(msg, "Welcome to the battleBit server Player %d\n", player);
+    sprintf(msg, "Welcome to the battleBit server Player %d\nbattleBit (? for help) > ", player);
+
     cb_append(output_buffer, msg);
     cb_write(SERVER->player_sockets[player], output_buffer);
 
@@ -62,6 +63,8 @@ int handle_client_connect(int player) {
 
 
         if(read_size > 0){
+
+
 
             raw_buffer[read_size] = '\0';
             cb_append(input_buffer, raw_buffer);
@@ -106,7 +109,7 @@ int handle_client_connect(int player) {
                 cb_write(SERVER->player_sockets[player], output_buffer);
 
             } else if (strcmp(command,"say") == 0){
-                sprintf(msg,"PLayer %d says:%s\n", player, raw_buffer + 3);
+                sprintf(msg,"Player %d says:%s\n", player, raw_buffer + 3);
                 cb_append(output_buffer, msg);
                 cb_write(SERVER->player_sockets[opponent], output_buffer);
 
@@ -114,15 +117,15 @@ int handle_client_connect(int player) {
             } else if (strcmp(command,"fire") == 0){
 
                 if(game->status == CREATED || game->status == INITIALIZED){
-                    cb_append(output_buffer, "The game has not started yet\n");
+                    cb_append(output_buffer, "Game Has Not Begun!\n");
                     cb_write(SERVER->player_sockets[player], output_buffer);
 
                 } else if (game->status == PLAYER_1_TURN && player == 0){
-                    cb_append(output_buffer, "It's not your turn\n");
+                    cb_append(output_buffer, "Player 1 Turn\n");
                     cb_write(SERVER->player_sockets[player], output_buffer);
 
                 } else if (game->status == PLAYER_0_TURN && player == 1){
-                    cb_append(output_buffer, "It's not your turn\n");
+                    cb_append(output_buffer, "Player 0 Turn\n");
                     cb_write(SERVER->player_sockets[player], output_buffer);
 
                 } else{
@@ -133,14 +136,17 @@ int handle_client_connect(int player) {
                         sprintf(msg, "Player %d fires at %d %d and missed\n", player, x,y);
                         cb_append(output_buffer, msg);
                         cb_write(SERVER->player_sockets[player], output_buffer);
+
+                        cb_write(SERVER->player_sockets[opponent], output_buffer);
                     } else{
                         if(game->players[opponent].ships != 0ull) {
                             sprintf(msg, "Player %d fires at %d %d and hits\n", player, x, y);
                             cb_append(output_buffer, msg);
                             cb_write(SERVER->player_sockets[player], output_buffer);
+                            cb_write(SERVER->player_sockets[opponent], output_buffer);
                         } else{
 
-                            sprintf(msg, "Your Opponent has no more ships left\n", player, x, y);
+                            sprintf(msg, "HIT - Player %d WINS!\n", player, x, y);
                             cb_append(output_buffer, msg);
                             cb_write(SERVER->player_sockets[player], output_buffer);
                             close(SERVER->player_sockets[player]);
@@ -156,6 +162,8 @@ int handle_client_connect(int player) {
                 cb_append(output_buffer, "This is an invalid command\n");
                 cb_write(SERVER->player_sockets[player], output_buffer);
             }
+
+
         }
     }
 }
