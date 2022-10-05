@@ -7,7 +7,7 @@ information.
 
 In CSCI 366, all project work is done individually.  Please follow these instructions
 
-- Create a *private* repository in your own account by
+- Create a repository in your own account by
     - Going to <https://github.com/new>
     - Enter the name `csci-366-spring2021-private`
     - Select `Private`
